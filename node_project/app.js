@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var fs = require('fs');
+var Guid = require('guid');
 
 var app = express();
 var server =  http.createServer(app);
@@ -23,22 +24,18 @@ app.get('/', function (req, res) {
     res.json(json);
 });
 
-app.get('/test', function (req, res) {
-    var json = {request: "/test"};
-    res.json(json);
-});
-
-app.get('/temp.png', function (req, res) {
-    res.sendFile(__dirname+'/temp.png');
-})
-
 app.post('/img', function (req, res) {
-    //Received image, store at temp.png
-    req.pipe(fs.createWriteStream('temp.png'));
+    // received image, store at <guid>.png
+    var guid = Guid.create().toString();
+    req.pipe(fs.createWriteStream(guid+'.png'));
 
     req.on('end', function() {
-        //Image is now stored at temp.png
-        res.send('Image received!');
+        // image is now stored at <guid>.png
+        res.sendFile(__dirname+'/'+guid+'.png', function(){
+            // remove the file
+            fs.unlink(guid+'.png');
+            console.log('Removed file');
+        });
     });
 });
 
