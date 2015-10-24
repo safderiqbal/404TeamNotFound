@@ -1,13 +1,19 @@
 var fs = require('fs');
 var path = require('path');
+var Guid = require('guid');
 
 exports.receiveImage = function (req, res) {
-    //Received image, store at temp.png
-    req.pipe(fs.createWriteStream('temp.png'));
+    // received image, store at <guid>.png
+    var guid = Guid.create().toString();
+    req.pipe(fs.createWriteStream(guid+'.png'));
 
     req.on('end', function() {
-        //Image is now stored at temp.png
-        res.send('Image received!');
+        // image is now stored at <guid>.png
+        res.sendFile(__dirname+'/'+guid+'.png', function(){
+            // remove the file
+            fs.unlink(guid+'.png');
+            console.log('Removed file');
+        });
     });
 };
 
