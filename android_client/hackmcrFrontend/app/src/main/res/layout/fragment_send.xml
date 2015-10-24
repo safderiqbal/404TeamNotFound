@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="net.dlym.hackmcrfrontend.send">
+
+    <LinearLayout xmlns:android="http://schemas.androidcom/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingLeft="16dp"
+                  android:paddingRight="16dp"
+                  android:orientation="vertical" >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="@string/txtPhoneTo" />
+
+        <Button
+            android:id="@+id/btnOpenContact"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/openContact" />
+        <ImageView
+            android:id="@+id/btnTakePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="#55ff0000"
+            android:src="@drawable/download"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/send" />
+    </LinearLayout>
+
+</FrameLayout>

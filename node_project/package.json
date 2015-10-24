@@ -1,0 +1,14 @@
+{
+  "name": "v-SMS",
+  "version": "0.0.1",
+  "description": "Visual SMS API",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
+    "errorhandler": "^1.4.2",
+    "express": "~4.13.3",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1"
+  }
+}
