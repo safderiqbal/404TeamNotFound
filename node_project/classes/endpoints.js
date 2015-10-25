@@ -6,7 +6,7 @@ exports.receiveImage = function (req, res) {
 
     // received image, store at <guid>.png
     var guid = Guid.create().toString();
-    req.pipe(fs.createWriteStream(guid+'.png'));
+    req.pipe(fs.createWriteStream('uploads/'+guid+'.png'));
 
     req.on('end', function() {
         // image is now stored at <guid>.png
@@ -20,7 +20,7 @@ exports.receiveImage = function (req, res) {
 
         // after 10 seconds, clean up the file
         setTimeout(function() {
-            fs.unlink(guid+'.png');
+            fs.unlink('uploads/'+guid+'.png');
             console.log('Removed image '+guid);
         }, 10000);
     });
