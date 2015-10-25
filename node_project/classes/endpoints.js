@@ -93,7 +93,10 @@ exports.receiveImage = function (req, res) {
                         // image identification successful - now get the result and call giphy api
                         var imageContents = imageResult.name;
                         getGiphy(imageContents, function(giphyResult) {
-                            res.send(giphyResult);
+                            // giphy results get - now we need to extract them
+                            // only one result at the moment, something to expand on if there's time
+                            var gifString = giphyResult.data[0].images.original.url;
+                            res.send(gifString);
                         });
                         //TODO Send links to gifs to requested number, via SMS
                     });
