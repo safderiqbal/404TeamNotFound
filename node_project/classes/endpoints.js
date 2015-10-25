@@ -46,7 +46,7 @@ function getRandomInt(min, max) {
 function getGiphy(imageContents, callback) {
     // call the giphy api
     console.log('Calling giphy with '+imageContents);
-    var giphyPath = '/v1/gifs/search?q=' + imageContents.replace(/ /g,'%20') + '&api_key=' + giphyKey;
+    var giphyPath = '/v1/gifs/search?q=' + imageContents.replace(/ /g,'%20') + '&limit=100&api_key=' + giphyKey;
     request.get('http://api.giphy.com' + giphyPath, function(err, response, giphyResultStr) {
         // giphy result got - if no values, remove a random part of the string and make a new request
         var giphyResult = JSON.parse(giphyResultStr);
@@ -61,7 +61,8 @@ function getGiphy(imageContents, callback) {
             }
             else {
                 var removedIndex = getRandomInt(0, imageContentsArray.length);
-                var newContents = imageContentsArray.splice(removedIndex, 1).join(' ');
+                imageContentsArray.splice(removedIndex, 1);
+                var newContents = imageContentsArray.join(' ');
                 getGiphy(newContents, callback);
             }
         }
@@ -94,8 +95,8 @@ exports.receiveImage = function (req, res) {
                         var imageContents = imageResult.name;
                         getGiphy(imageContents, function(giphyResult) {
                             // giphy results get - now we need to extract them
-                            // only one result at the moment, something to expand on if there's time
-                            var gifString = giphyResult.data[0].images.original.url;
+                            var randomIndex = getRandomInt(0,giphyResult.data.length);
+                            var gifString = giphyResult.data[randomIndex].images.original.url;
                             res.send(gifString);
                         });
                         //TODO Send links to gifs to requested number, via SMS
