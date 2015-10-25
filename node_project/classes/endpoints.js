@@ -57,7 +57,7 @@ function getGiphy(imageContents, callback) {
                 getGiphy('doctor who tv sad pout', callback);
             }
             else {
-                var removedIndex = getRandomInt(0, imageContentsArray.length);
+                var removedIndex = getRandomInt(0, imageContentsArray.length - 1);
                 imageContentsArray.splice(removedIndex, 1);
                 var newContents = imageContentsArray.join(' ');
                 getGiphy(newContents, callback);
@@ -87,18 +87,22 @@ exports.start = function (req, res) {
                     var imageContents = imageResult.name;
                     getGiphy(imageContents, function(giphyResult) {
                         // giphy results get - now we need to extract them
-                        var randomIndex = getRandomInt(0,giphyResult.data.length);
+                        var randomIndex = getRandomInt(0,giphyResult.data.length - 1);
+                        console.log('Number of GIFs found: ' + giphyResult.data.length);
+                        console.log('Random number: ' +randomIndex);
                         var gifString = giphyResult.data[randomIndex].images.original.url;
 
                         // now send the gifstring to the recipient
-                        clockwork.sendSms({To:req.body['to'], Content: gifString}, function(err, response) {
-                            if (err) {
-                                return res.status(400).send({error: 'Something went wrong with ClockworkSMS'});
+                        clockwork.sendSms({To:req.body['to'], Content: 'From: ' + req.body.from + '\nGIF: ' + gifString + '\nTags: ' + imageContents},
+                            function(err, response) {
+                                if (err) {
+                                    return res.status(400).send({error: 'Something went wrong with ClockworkSMS'});
+                                }
+                                else {
+                                    return res.send({status: 'Successfully sent!'});
+                                }
                             }
-                            else {
-                                return res.send({status: 'Successfully sent!'});
-                            }
-                        })
+                        )
                     });
                 });
             } else {
