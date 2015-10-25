@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:orientation="vertical"
+    android:background="#444">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:text="VSMS"
+        android:textSize="42sp"
+        android:textColor="#ddd"
+        android:fontFamily="sans-serif-medium"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+
+        android:textColor="#ddd"
+        android:layout_marginTop="20dp"
+        android:text="If a picture says a 1000 words, how many does a gif say?"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"/>
+
+
+    <LinearLayout    android:layout_height="wrap_content"
+                     android:layout_width="fill_parent"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginTop="50dp">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contact's Number"
+        android:id="@+id/txtTo"
+
+        android:inputType="phone"
+        android:background="#ddd"
+        android:textColor="#111"
+        android:phoneNumber="true"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="5"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/abc_ic_search"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"/>
+</LinearLayout>
+
+    <LinearLayout    android:layout_height="wrap_content"
+                     android:layout_width="fill_parent"
+                     android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp">
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnPicture"
+        android:src="@drawable/photo"
+        android:text="@string/btnPictureText"
+
+        android:textColor="#111"
+        android:layout_weight="1" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSend"
+        android:textColor="#111"
+        android:enabled="false"
+        android:text="@string/btnSendText"
+        android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

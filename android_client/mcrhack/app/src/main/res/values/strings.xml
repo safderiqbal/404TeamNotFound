@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">mcrhack</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="phoneHint">Phone Number...</string>
+    <string name="btnPictureText">Take a Photo</string>
+    <string name="btnSendText">Send</string>
+</resources>
