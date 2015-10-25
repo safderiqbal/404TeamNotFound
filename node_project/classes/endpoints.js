@@ -68,7 +68,8 @@ function getGiphy(imageContents, callback) {
 
 exports.start = function (req, res) {
     if (!req.body || !req.body.to || !req.body.from || !req.body.imageUrl) {
-        return res.status(400).send({error: 'Sorry, that wasn\'t a valid request. Be sure to include a `to`, `from` and `imageUrl` in your post'});
+        res.status(400).send({error: 'Sorry, that wasn\'t a valid request. Be sure to include a `to`, `from` and `imageUrl` in your post'});
+        return res.end();
     }
 
     unirest.post('https://camfind.p.mashape.com/image_requests')
@@ -108,7 +109,7 @@ exports.start = function (req, res) {
 
 exports.landingPage = function (req, res) {
     res.writeHeader(200, {'Content-Type': 'text\\html'});
-    response.write('<h1>This is just an API!</h1><p>Try sending form data with a `to` (a valid UK mobile phone number),' +
+    res.write('<h1>This is just an API!</h1><p>Try sending form data with a `to` (a valid UK mobile phone number),' +
         ' `from` (a valid UK mobile phone number), and `imageUrl` (a link to an image you wish to run, hosted online)</p>');
-    response.end();
+    res.end();
 };
