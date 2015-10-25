@@ -72,6 +72,20 @@ exports.start = function (req, res) {
         return res.end();
     }
 
+    if (!(req.body.to[0] == 0 && req.body.to[1] == 7 && req.body.to.length === 11) ||
+        !(req.body.from[0] == 0 && req.body.to[1] == 7 && req.body.from.length === 11)) {
+        res.status(400).send({
+            error: 'Please enter valid UK mobile phone pages for the `to` and `from` fields'
+        });
+        return res.end();
+    }
+    if (!req.body.imageUrl.match(/https?:\/\/.*\.(?:png|jpg)/mi)) {
+        res.status(400).send({
+            error: 'Please enter a valid image'
+        });
+        return res.end();
+    }
+
     unirest.post('https://camfind.p.mashape.com/image_requests')
         .header('X-Mashape-Key', mashapeKey)
         .header('Content-Type', 'application/x-www-form-urlencoded')
