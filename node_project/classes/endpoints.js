@@ -85,12 +85,20 @@ exports.start = function (req, res) {
                     // image identification successful - now get the result and call giphy api
                     var imageContents = imageResult.name;
                     getGiphy(imageContents, function(giphyResult) {
-                            // giphy results get - now we need to extract them
-                            var randomIndex = getRandomInt(0,giphyResult.data.length);
-                            var gifString = giphyResult.data[randomIndex].images.original.url;
-                            res.send(gifString);
+                        // giphy results get - now we need to extract them
+                        var randomIndex = getRandomInt(0,giphyResult.data.length);
+                        var gifString = giphyResult.data[randomIndex].images.original.url;
+
+                        // now send the gifstring to the recipient
+                        clockwork.sendSms({To:req.body['to'], Content: gifString}, function(err, response) {
+                            if (err) {
+                                return res.status(400).send({error: 'Something went wrong with ClockworkSMS'});
+                            }
+                            else {
+                                return res.send({status: 'Successfully sent!'});
+                            }
+                        })
                     });
-                    //TODO Send links to gifs to requested number, via SMS
                 });
             } else {
                 res.status(400).send({ error: 'Sorry, the image recognition has a problem' });
