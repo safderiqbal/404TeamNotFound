@@ -4,7 +4,6 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var endpoints = require('./classes/endpoints');
-var fs = require('fs');
 
 var app = express();
 var server =  http.createServer(app);

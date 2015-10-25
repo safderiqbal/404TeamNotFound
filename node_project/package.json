@@ -4,10 +4,11 @@
   "description": "Visual SMS API",
   "main": "app.js",
   "dependencies": {
+    "clockwork": "^0.1.0",
     "errorhandler": "^1.4.2",
     "express": "~4.13.3",
+    "guid": "0.0.12",
     "method-override": "^2.3.5",
-    "morgan": "^1.6.1",
-    "guid": "0.0.12"
+    "morgan": "^1.6.1"
   }
 }

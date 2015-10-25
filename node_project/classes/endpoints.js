@@ -1,19 +1,25 @@
 var fs = require('fs');
 var path = require('path');
-var Guid = require('guid');
+var guid = require('guid');
+var config = require('config');
+var clockwork = require('clockwork')({key: config.get('keys.clockwork')});
 
 exports.receiveImage = function (req, res) {
-    // received image, store at <guid>.png
-    var guid = Guid.create().toString();
-    req.pipe(fs.createWriteStream(guid+'.png'));
+    var image = guid.create().toString();
+    req.pipe(fs.createWriteStream('uploads/' +image+'.png'));
 
     req.on('end', function() {
-        // image is now stored at <guid>.png
-        res.sendFile(__dirname+'/'+guid+'.png', function(){
-            // remove the file
-            fs.unlink(guid+'.png');
-            console.log('Removed file');
-        });
+        // //image is now stored at <image>.png
+        //res.sendFile(__dirname+'/'+image+'.png', function(){
+        //    // remove the file
+        //    fs.unlink(image+'.png');
+        //    console.log('Removed file');
+        //});
+
+        var image_location = 'http://dlym.net:3000/uploads/' + image + '.png';
+
+        res.send({success: 'Image uploaded!'});
+        //TODO Send image to image recognition & then results to clockwork location
     });
 };
 
