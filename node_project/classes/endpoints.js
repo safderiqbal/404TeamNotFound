@@ -68,7 +68,7 @@ function getGiphy(imageContents, callback) {
 
 exports.start = function (req, res) {
     if (!req.body || !req.body.to || !req.body.from || !req.body.imageUrl) {
-        res.status(400).send({error: 'Sorry, that wasn\'t a valid request. Be sure to include a `to`, `from` and `imageUrl` in your post'});
+        return res.status(400).send({error: 'Sorry, that wasn\'t a valid request. Be sure to include a `to`, `from` and `imageUrl` in your post'});
     }
 
     unirest.post('https://camfind.p.mashape.com/image_requests')
