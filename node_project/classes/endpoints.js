@@ -10,16 +10,21 @@ exports.receiveImage = function (req, res) {
 
     req.on('end', function() {
         // //image is now stored at <image>.png
-        //res.sendFile(__dirname+'/'+image+'.png', function(){
-        //    // remove the file
-        //    fs.unlink(image+'.png');
-        //    console.log('Removed file');
-        //});
+        console.log('Received image '+image + '.png');
 
+        // send confirmation json
+        res.json({
+            status: 'success',
+            guid: guid
+        });
+        
         var image_location = 'http://dlym.net:3000/uploads/' + image + '.png';
-
-        res.send({success: 'Image uploaded!'});
-        //TODO Send image to image recognition & then results to clockwork location
+        
+        // after 10 seconds, clean up the file
+        setTimeout(function() {
+            fs.unlink('uploads/'+image+'.png');
+            console.log('Removed image ' + image + '.png');
+        }, 10000);
     });
 };
 
