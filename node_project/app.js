@@ -14,7 +14,6 @@ app.use(logger('dev'));
 app.use(methodOverride());
 
 app.get('/', endpoints.test);
-app.get('/image', endpoints.serveImage);
 app.post('/image', endpoints.receiveImage);
 
 // catch 404 and forward to error handler

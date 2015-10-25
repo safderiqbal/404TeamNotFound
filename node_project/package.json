@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "clockwork": "^0.1.0",
+    "config": "^1.16.0",
     "errorhandler": "^1.4.2",
     "express": "~4.13.3",
     "guid": "0.0.12",
